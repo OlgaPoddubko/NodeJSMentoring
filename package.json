@@ -4,22 +4,36 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon --exec babel-node task_2/app.js",
+    "build": "babel index.js --out-file index-compiled.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/OlgaPoddubko/NodeJSMentoring.git"
   },
-  "author": "",
+  "author": "Olga Poddubko",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/OlgaPoddubko/NodeJSMentoring/issues"
   },
   "homepage": "https://github.com/OlgaPoddubko/NodeJSMentoring#readme",
   "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/node": "^7.10.5",
+    "@babel/preset-env": "^7.11.5",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.8.1",
     "nodemon": "^2.0.4"
   },
   "dependencies": {
-    "csvtojson": "^2.0.10"
+    "csvtojson": "^2.0.10",
+    "express": "^4.17.1",
+    "heroku": "^7.44.0",
+    "joi": "^17.2.1",
+    "pg": "^8.4.0",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^6.3.5",
+    "uuid": "^8.3.0"
   }
 }
