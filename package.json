@@ -2,10 +2,10 @@
   "name": "nodejsmentoring",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "dev": "nodemon --exec babel-node task_2/app.js",
-    "build": "babel index.js --out-file index-compiled.js",
+    "dev": "nodemon --exec babel-node src/app.js",
+    "build": "babel app.js --out-file app-compiled.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
