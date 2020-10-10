@@ -16,16 +16,3 @@ app.listen(8080,() => {
 })
 
 db.sequelize.sync()
-
-
-/*db.sequelize.sync({ force: true }).then(async () => {
-  await sequelize.queryInterface.bulkInsert('Groups', [
-    {
-      name: 'Group Name 1',
-      permissions: sequelize.literal(`ARRAY['READ']::"enum_Items_values"[]`),
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }
-  ]);
-});
-*/
