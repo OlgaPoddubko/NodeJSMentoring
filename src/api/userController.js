@@ -3,6 +3,7 @@ import { validate } from '../services/validation.js'
 import { v4 as uuid } from 'uuid'
 
 const Users = db.users;
+const Groups = db.groups;
 const Op = db.Sequelize.Op;
 
 export function create(req, res) {
@@ -22,7 +23,6 @@ export function create(req, res) {
 
   Users.create(user)
     .then(data => {
-      console.log(user)
       res.send(data);
     })
     .catch(err => {
@@ -92,7 +92,16 @@ export function deleteUser(req, res) {
 export function getUser(req, res) {
   const id = req.params.id;
 
-  Users.findByPk(id)
+  Users.findByPk(id, { include: [
+      {
+        model: Groups,
+        as: "groups",
+        attributes: ["id", "name", "permissions"],
+        through: {
+          attributes: [],
+        }
+      },
+    ]} )
     .then(data => {
       if(!data.isDeleted) {
         res.send(data);
@@ -113,7 +122,17 @@ export function getAutoSuggestedUsers(req, res) {
   const order = [['login', 'ASC'],]
   const limit = req.query.limit;
 
-  Users.findAll({ where: condition,  order: order, limit: limit })
+  Users.findAll({ where: condition,  order: order, limit: limit,
+    include: [
+        {
+          model: Groups,
+          as: "groups",
+          attributes: ["id", "name", "permissions"],
+          through: {
+            attributes: [],
+          }
+        },
+      ], })
     .then(data => {
       res.send(data);
     })
