@@ -1,6 +1,6 @@
 import express from 'express'
 import { validate } from '../services/validation.js'
-import { create, update, deleteUser, getUser, getAutoSuggestedUsers } from './userController.js'
+import { create, update, deleteUser, getUser, getAutoSuggestedUsers } from '../controllers/userController.js'
 
 const router = express.Router();
 

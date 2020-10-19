@@ -1,6 +1,6 @@
 import express from 'express'
 import { validate } from '../services/validation.js'
-import { addUsersToGroup } from './userGroupController.js'
+import { addUsersToGroup } from '../controllers/userGroupController.js'
 
 const router = express.Router();
 
