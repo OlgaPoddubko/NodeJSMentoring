@@ -1,17 +1,17 @@
 import express from 'express'
 import { validate } from '../services/validation.js'
-import { create, update, deleteUser, getUser, getAutoSuggestedUsers } from '../controllers/userController.js'
+import UserController from '../controllers/userController.js'
 
 const router = express.Router();
 
-router.post('/', create)
+router.post('/', UserController.create)
 
-router.put('/:id',update)
+router.put('/:id', UserController.update)
 
-router.delete('/:id', deleteUser)
+router.delete('/:id', UserController.deleteUser)
 
-router.get('/:id', getUser)
+router.get('/:id', UserController.getUser)
 
-router.get('/', getAutoSuggestedUsers)
+router.get('/', UserController.getAutoSuggestedUsers)
 
 export default router
