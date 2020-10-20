@@ -1,4 +1,5 @@
 import db from '../models'
+import { logger, infoMessageTemplate, errorMessageTemplate } from '../logger/logger.js'
 
 const Groups = db.groups;
 const Users = db.users;
@@ -32,6 +33,7 @@ class UserGroupController{
               res.send(data);
             })
             .catch(err => {
+              logger.error(errorMessageTemplate('UserGroupController.addUsersToGroup', req, err))
               res.status(500).send({
                 message:
                   err.message || "Some error occurred while creating the UserGroup."

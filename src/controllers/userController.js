@@ -1,6 +1,7 @@
 import db from '../models'
 import { validate } from '../services/validation.js'
 import { v4 as uuid } from 'uuid'
+import { logger, infoMessageTemplate, errorMessageTemplate } from '../logger/logger.js'
 
 const Users = db.users;
 const Groups = db.groups;
@@ -8,8 +9,11 @@ const Op = db.Sequelize.Op;
 
 class UserController {
   create(req, res) {
+    logger.info(infoMessageTemplate('UserController.create', req))
+
     const error = validate(req.body);
     if (error) {
+      logger.error(errorMessageTemplate('UserController.create validation', req, error))
       res.status(404).send(error);
       return;
     }
@@ -27,6 +31,7 @@ class UserController {
         res.send(data);
       })
       .catch(err => {
+        logger.error(errorMessageTemplate('UserController.create', req, err))
         res.status(500).send({
           message:
             err.message || "Some error occurred while creating the User."
@@ -35,8 +40,11 @@ class UserController {
   };
 
   update(req, res) {
+    logger.info(infoMessageTemplate('UserController.update', req))
+
     const error = validate(req.body, true)
     if (error) {
+      logger.error(errorMessageTemplate('UserController.update validation', req, error))
       res.status(404).send(error);
       return;
     }
@@ -58,6 +66,7 @@ class UserController {
         }
       })
       .catch(err => {
+        logger.error(errorMessageTemplate('UserController.update', req, err))
         res.status(500).send({
           message: `Error updating User with id=${id}`
         });
@@ -65,6 +74,8 @@ class UserController {
   };
 
   deleteUser(req, res) {
+    logger.info(infoMessageTemplate('UserController.deleteUse', req))
+
     const id = req.params.id;
     const softDeleteBody = {...req.body, isDeleted: true}
 
@@ -83,6 +94,7 @@ class UserController {
         }
       })
       .catch(err => {
+        logger.error(errorMessageTemplate('UserController.deleteUser', req, err))
         res.status(500).send({
           message: `Error deleting User with ${id}.`
         });
@@ -90,6 +102,8 @@ class UserController {
   };
 
   getUser(req, res) {
+    logger.info(infoMessageTemplate('UserController.getUser', req))
+
     const id = req.params.id;
 
     Users.findByPk(id, { include: [
@@ -109,6 +123,7 @@ class UserController {
         res.status(404).send(`Cannot find User with id=${id}.`);
       })
       .catch(err => {
+        logger.error(errorMessageTemplate('UserController.getUser', req, err))
         res.status(500).send({
           message: `Error retrieving User with id=${id}`
         });
@@ -116,6 +131,8 @@ class UserController {
   };
 
   getAutoSuggestedUsers(req, res) {
+    logger.info(infoMessageTemplate('UserController.getAutoSuggestedUsers', req))
+
     const login = req.query.login;
     const condition = login ? { login: { [Op.iLike]: `%${login}%` } } : null;
 
@@ -137,13 +154,13 @@ class UserController {
         res.send(data);
       })
       .catch(err => {
+        logger.error(errorMessageTemplate('UserController.getAutoSuggestedUsers', req, err))
         res.status(500).send({
           message:
             err.message || "Some error occurred while retrieving users."
         });
       });
   };
-
 }
 
 export default new UserController()

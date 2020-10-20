@@ -1,5 +1,6 @@
 import db from '../models'
 import { v4 as uuid } from 'uuid'
+import { logger, infoMessageTemplate, errorMessageTemplate } from '../logger/logger.js'
 
 const Groups = db.groups;
 const Users = db.users;
@@ -23,6 +24,7 @@ class GroupController {
         res.send(data);
       })
       .catch(err => {
+        logger.error(errorMessageTemplate('GroupController.createGroup', req, err))
         res.status(500).send({
           message:
             err.message || "Some error occurred while creating the Group."
@@ -48,6 +50,7 @@ class GroupController {
         }
       })
       .catch(err => {
+        logger.error(errorMessageTemplate('GroupController.updateGroup', req, err))
         res.status(500).send({
           message: `Error updating Group with id=${id}`
         });
@@ -73,6 +76,7 @@ class GroupController {
         }
       })
       .catch(err => {
+        logger.error(errorMessageTemplate('GroupController.deleteGroup', req, err))
         res.status(500).send({
           message: `Error deleting Group with ${id}.`
         });
@@ -96,6 +100,7 @@ class GroupController {
         res.send(data);
       })
       .catch(err => {
+        logger.error(errorMessageTemplate('GroupController.getGroup', req, err))
         res.status(500).send({
           message: `Error retrieving Group with id=${id}`
         });
@@ -117,6 +122,7 @@ class GroupController {
         res.send(data);
       })
       .catch(err => {
+        logger.error(errorMessageTemplate('GroupController.getAllGroups', req, err))
         res.status(500).send({
           message:
             err.message || "Some error occurred while retrieving groups."
