@@ -1,0 +1,3 @@
+{"message":"UserController.getUser, method: GET, url: '/765'","level":"info"}
+{"message":"UserController.getUser, method: GET, error: SequelizeDatabaseError: invalid input syntax for type uuid: \"765\"","level":"error"}
+{"message":"GroupController.createGroup, method: POST, error: SequelizeDatabaseError: invalid input value for enum enum_groups_permissions: \"DEL\"","level":"error"}

@@ -1,7 +1,7 @@
 import express from 'express'
-import users from './api/userRouter.js'
-import groups from './api/groupRouter.js'
-import userGroup from './api/userGroupRouter.js'
+import users from './routers/userRouter.js'
+import groups from './routers/groupRouter.js'
+import userGroup from './routers/userGroupRouter.js'
 import db from './models/index.js'
 
 const app = express();
