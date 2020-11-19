@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon --exec babel-node src/app.js",
     "build": "babel app.js --out-file app-compiled.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --config ./jest.config.json",
+    "test:watch": "npm run test -- --watch"
   },
   "repository": {
     "type": "git",
@@ -19,16 +20,19 @@
   },
   "homepage": "https://github.com/OlgaPoddubko/NodeJSMentoring#readme",
   "devDependencies": {
-    "@babel/core": "^7.11.6",
+    "@babel/core": "^7.12.3",
     "@babel/node": "^7.10.5",
-    "@babel/preset-env": "^7.11.5",
+    "@babel/preset-env": "^7.12.1",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.8.1",
+    "jest": "^26.6.3",
     "nodemon": "^2.0.4"
   },
   "dependencies": {
+    "babel-jest": "^26.6.3",
     "cors": "^2.8.5",
     "csvtojson": "^2.0.10",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "joi": "^17.2.1",
     "jsonwebtoken": "^8.5.1",
