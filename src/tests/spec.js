@@ -13,7 +13,7 @@ const mockResponse = () => {
   }
 
 describe("Check method \'getUser\' ", () => {
-    test('should return for incorrect id', async () => {
+    test('should return 404 for incorrect id', async () => {
       const req = mockRequest();
       req.params.id = null;
       const res = mockResponse();
