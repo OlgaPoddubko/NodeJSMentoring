@@ -117,7 +117,7 @@ class UserController {
         },
       ]} )
       .then(data => {
-        if(!data.isDeleted) {
+        if(data && !data.isDeleted) {
           res.send(data);
         }
         res.status(404).send(`Cannot find User with id=${id}.`);
